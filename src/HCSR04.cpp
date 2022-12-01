@@ -18,16 +18,14 @@ HCSR04::HCSR04(uint8_t iTriggerPin, uint8_t iEchoPin, int iLowLimit = 1, int iHi
  * 
  * @return int the distance in centimeters readed on the HCSR04
  */
-bool HCSR04::getRawValue()
+int HCSR04::getRawValue()
 {
     digitalWrite(triggerPin, LOW);
     delayMicroseconds(2);
     digitalWrite(triggerPin, HIGH);
     delayMicroseconds(10);
     digitalWrite(triggerPin, LOW);
-    duration = pulseIn(echoPin, HIGH);
-    distance = duration * 0.034 / 2;
-    return distance;
+    return pulseIn(echoPin, HIGH) * 0.034 / 2;
 }
 
 /**
